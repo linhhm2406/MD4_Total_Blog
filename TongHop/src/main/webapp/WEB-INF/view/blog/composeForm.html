@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="blog/blogList::header"></div>
+</head>
+<body>
+<div class="container">
+    <h1>Compose</h1>
+    <form method="post" th:object="${blogForm}" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}" name="id">
+            <table class="table table-hover">
+                <tr>
+                    <th>Title</th>
+                    <td><input type="text" th:field="*{title}"></td>
+                </tr>
+                <tr>
+                    <th>Content</th>
+                    <td><textarea name="content" id="" cols="30" rows="10" th:field="*{content}"></textarea></td>
+                </tr>
+                <tr>
+                    <th>Author</th>
+                    <td><select name="author">
+                        <option th:each="a : ${authorList}" th:value="${a.id}"
+                                th:text="${a.getUserName()}"></option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                    <td><select name="category">
+                        <option th:each="c : ${categoryList}" th:value="${c.id}"
+                                th:text="${c.getCategoryName()}"></option>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Avatar</th>
+                    <td><input type="file" th:field="*{avatar}" name="avatar"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" th:value="Create"></td>
+                </tr>
+            </table>
+    </form>
+</div>
+</body>
+</html>
